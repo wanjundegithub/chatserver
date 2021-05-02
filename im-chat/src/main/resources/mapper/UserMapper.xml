@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.im.chat.data.dao.UserDao">
+    <insert id="addUser" parameterType="User" >
+        insert into users (userName,password,sex,age,signature)
+        values(#{userName},#{password},#{sex},#{age},#{signature})
+    </insert>
+    <delete id="deleteUser" parameterType="java.lang.Integer" >
+        delete from users where userID=#{userID}
+    </delete>
+    <update id="updateUser">
+        update users set userName=#{user.userName},
+                         password=#{user.password},
+                         sex=#{user.sex},
+                         age=#{user.age},
+                         signature=#{user.signature} where userID=#{userID}
+    </update>
+    <select id="queryUser" resultType="java.lang.Integer">
+        select userID from users where userName=#{userName}
+    </select>
+    <select id="queryMaxUserID" resultType="java.lang.Integer">
+        select  MAX(userID) as userID from users
+    </select>
+    <select id="getUserByUserID" resultType="com.company.im.chat.data.model.User" >
+        select * from users where userID=#{userID};
+    </select>
+    <select id="getUserByUserName" resultType="com.company.im.chat.data.model.User" >
+        select * from users where userName=#{userName};
+    </select>
+</mapper>

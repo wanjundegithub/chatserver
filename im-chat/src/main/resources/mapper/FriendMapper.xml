@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.company.im.chat.data.dao.FriendDao">
+    <resultMap id="friend" type="com.company.im.chat.data.model.Friend"></resultMap>
+    <select id="queryFriends" resultType="friend" parameterType="java.lang.Integer">
+        select a.userID,a.userName,b.remark ,a.signature,a.age,a.sex from users as a
+        left join friends as b on a.userID=b.userFriendID where b.userID=#{userID}
+    </select>
+</mapper>
