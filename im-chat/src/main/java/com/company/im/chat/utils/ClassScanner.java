@@ -45,13 +45,6 @@ public class ClassScanner {
     }
 
     /*
-    **获取定制注解类
-     */
-    public static <A extends Annotation> Set<Class<?>>  getAnnotationClass(String scanClassPath,
-                                                                           Class<A> annotationClass){
-        return getClass(scanClassPath,clazz->clazz.getAnnotation(annotationClass)!=null);
-    }
-    /*
     **根据过滤条件获取包下类
      */
     public static Set<Class<?>> getClass(String pack, Predicate<Class<?>> filter){

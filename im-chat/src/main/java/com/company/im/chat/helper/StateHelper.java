@@ -9,7 +9,7 @@ public class StateHelper {
 
     public static final byte OffLine=0;
 
-    public static final String Female=String.valueOf("female");
+    public static final String Female="Female";
 
-    public static final String Male=String.valueOf("male");
+    public static final String Male="Male";
 }
