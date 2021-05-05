@@ -10,6 +10,7 @@ import io.netty.buffer.ByteBuf;
  */
 public class ResFriendLoginPacket extends AbstractPacket {
 
+
     private String friendName;
 
     public ResFriendLoginPacket(String friendName) {
