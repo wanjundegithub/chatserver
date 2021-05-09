@@ -21,6 +21,26 @@ public class ResUserInfoPacket extends AbstractPacket {
 
     private String signature;
 
+    public ResUserInfoPacket(User user){
+        this.userName=user.getUserName();
+        this.password=user.getPassword();
+        this.sex = user.getSex();
+        this.age = user.getAge();
+        this.signature = user.getSignature();
+    }
+
+    public ResUserInfoPacket(String userName, String password, String sex,
+                             int age, String signature) {
+        this.userName = userName;
+        this.password = password;
+        this.sex = sex;
+        this.age = age;
+        this.signature = signature;
+    }
+
+    public ResUserInfoPacket() {
+    }
+
     @Override
     public int getPacketID() {
         return PacketType.ResUserInfo;

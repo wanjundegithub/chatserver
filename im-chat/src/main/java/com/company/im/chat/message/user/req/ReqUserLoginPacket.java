@@ -37,4 +37,12 @@ public class ReqUserLoginPacket extends AbstractPacket {
         userName=readByteToString(byteBuf);
         password=readByteToString(byteBuf);
     }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
 }

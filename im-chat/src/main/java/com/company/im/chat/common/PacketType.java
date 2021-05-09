@@ -86,13 +86,8 @@ public  class PacketType {
     public static int ResUserInfo=8_001;
 
     /*
-     **回应-好友
-     */
-    public static int ResFriendsInfo=9_001;
-
-    /*
      **回应-好友列表
      */
-    public static int ResFriendList=9_002;
+    public static int ResFriendList=9_001;
 
 }

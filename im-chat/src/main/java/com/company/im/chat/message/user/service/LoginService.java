@@ -24,6 +24,12 @@ public class LoginService {
     @Autowired
     private UserService userService;
 
+    /**
+     * 用户登录验证
+     * @param userName
+     * @param password
+     * @param channel
+     */
     public void LoginValidation(String userName, String password, Channel channel) {
         User user=userService.validateUser(userName,password);
         IOSession session= ChannelUtil.getSession(channel);
@@ -37,14 +43,27 @@ public class LoginService {
             session.sendPacket(packet);
             return;
         }
+        onSucceedLoginHandle(user,session);
+    }
+
+    /**
+     * 验证通过后处理
+     * @param user
+     * @param session
+     */
+    private void onSucceedLoginHandle(User user,IOSession session){
+        var userName=user.getUserName();
+        userService.addOnlineUser(userName,user);
+        //注册user对应session
         if(!SessionManager.Instance.RegisterSession(user,session)) {
             return;
         }
         AbstractPacket packet=new ResUserLoginPacket(StateHelper.Action_Success,
-                userName+"success login");
+                userName+" success login");
         session.sendPacket(packet);
-        //处理执行
-        SpringContext.getEventDispatcher().fireEvent(new UserLoginEvent(EventType.LOGIN,userName));
+        //处理相关的登录事件
+        SpringContext.getEventDispatcher().fireEvent(
+                new UserLoginEvent(EventType.LOGIN,userName));
     }
 
 

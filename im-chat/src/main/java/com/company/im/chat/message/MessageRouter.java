@@ -11,6 +11,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 消息路由，由消息标识中获取消息实体，消息处理器
+ */
 public enum MessageRouter {
 
     Instance;
@@ -87,7 +90,7 @@ public enum MessageRouter {
             messageHandle.action(session,packet);
         }
         catch (Exception e){
-            logger.error(e.getMessage());
+            logger.error("异常:"+e.getMessage());
         }
     }
 

@@ -24,13 +24,22 @@ public class ListenManager {
         return o.getClass().getName()+"-"+eventType.toString();
     }
 
+    /**
+     * 添加监听
+     * @param o
+     * @param eventType
+     * @param method
+     */
     public void addListenHandle(Object o,EventType eventType,Method method){
         var key=getKey(o,eventType);
         listenHandles.put(key,method);
     }
 
-    /*
-    **分发执行
+    /**
+     * 执行事件
+     * @param handle
+     * @param event
+     * @throws IllegalAccessException
      */
     public void fireEvent(Object handle,EventBase event) throws IllegalAccessException {
         var key=getKey(handle,event.getEventType());

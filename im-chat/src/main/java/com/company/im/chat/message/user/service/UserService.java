@@ -5,6 +5,8 @@ import com.company.im.chat.data.dao.UserDao;
 import com.company.im.chat.data.model.User;
 import com.company.im.chat.common.SessionCloseReason;
 import com.company.im.chat.common.StateHelper;
+import com.company.im.chat.message.AbstractPacket;
+import com.company.im.chat.message.user.res.ResUserInfoPacket;
 import com.company.im.chat.message.user.res.ResUserRegisterPacket;
 import com.company.im.chat.session.IOSession;
 import com.company.im.chat.session.SessionManager;
@@ -117,20 +119,11 @@ public class UserService {
     }
 
     /*
-    **更新用户
+    **获取用户信息
      */
-    public boolean updateUser(Channel channel,User user){
-//        if(!onlineUsers.contains(user.getUserName())){
-//            logger.error(user.getUserName()+" cannot update");
-//            return false;
-//        }
-//        AbstractPacket packet=new ResUserUpdatePacket(user.getUserName(),user.getPassword(),
-//                user.getSex(),user.getAge(),user.getSignature());
-//        var id=userDao.queryUser(user.getUserName());
-//        userDao.updateUser(user,id);
-//        SessionManager.Instance.sendPacket(user.getUserName(),packet);
-//        logger.info(user.getUserName()+" update success");
-        return true;
+    public void onGetUserInfo(User user){
+        AbstractPacket packet=new ResUserInfoPacket(user);
+        SessionManager.Instance.sendPacket(user.getUserName(),packet);
     }
 
     /*

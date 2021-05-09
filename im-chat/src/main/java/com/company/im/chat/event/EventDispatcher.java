@@ -42,7 +42,7 @@ public class EventDispatcher {
     public void triggerEvent(EventBase eventBase) {
         var listeners=observers.get(eventBase.getEventType());
         if(listeners==null||listeners.isEmpty()){
-            logger.info("listeners is empty");
+            logger.error("listeners is empty");
             return;
         }
         try {

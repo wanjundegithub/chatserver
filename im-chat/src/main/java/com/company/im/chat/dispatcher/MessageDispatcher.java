@@ -10,6 +10,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+/**
+ * 多线程处理用户消息
+ */
 @Component
 public class MessageDispatcher {
 

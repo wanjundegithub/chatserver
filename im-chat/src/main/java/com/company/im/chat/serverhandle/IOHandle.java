@@ -31,6 +31,7 @@ public class IOHandle extends ChannelInboundHandlerAdapter {
         if(!ChannelUtil.addChannelSession(channel,new IOSession(channel))){
             logger.error("重复会话,远程IP："+ChannelUtil.getRemoteIp(channel));
         }
+        logger.info("succeed register channel");
     }
 
     /*
@@ -47,6 +48,7 @@ public class IOHandle extends ChannelInboundHandlerAdapter {
         logger.info("succeed receive pact, content is {}",
                 message.getClass().getSimpleName());
         var session=ChannelUtil.getSession(channel);
+        logger.info("dispatchKey is :{}",session.getDispatchKey());
         var userTask=new CmdTask(session.getDispatchKey(),message,session);
         //线程池处理用户消息
         SpringContext.getMessageDispatcher().submitTask(userTask);
