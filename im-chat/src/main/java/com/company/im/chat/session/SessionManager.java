@@ -1,9 +1,9 @@
 package com.company.im.chat.session;
 
 import com.company.im.chat.data.model.User;
-import com.company.im.chat.helper.SessionCloseReason;
+import com.company.im.chat.common.SessionCloseReason;
 import com.company.im.chat.message.AbstractPacket;
-import com.company.im.chat.message.user.ResUserLogoutPacket;
+import com.company.im.chat.message.user.res.ResUserLogoutPacket;
 import com.company.im.chat.utils.ChannelUtil;
 import io.netty.channel.Channel;
 import org.slf4j.Logger;

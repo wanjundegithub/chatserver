@@ -1,11 +1,11 @@
 package com.company.im.chat.util;
 
-import com.company.im.chat.helper.PacketType;
+import com.company.im.chat.common.PacketType;
 import com.company.im.chat.message.AbstractPacket;
 import com.company.im.chat.message.MessageHandle;
 import com.company.im.chat.message.MessageRouter;
 import com.company.im.chat.session.IOSession;
-import com.company.im.chat.utils.ClassScanner;
+import com.company.im.chat.utils.ClassScannerUtil;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +34,7 @@ public class TestMessageRouter {
     public void testAddPacket(){
 
         Map<Integer ,Class<? extends AbstractPacket>> msgPools=new HashMap<>();
-        var packetClasses= ClassScanner.getAllSubClass("com.company.message",
+        var packetClasses= ClassScannerUtil.getAllSubClass("com.company.message",
                 AbstractPacket.class);
         packetClasses.forEach(p->{
             AbstractPacket packet=null;
@@ -55,7 +55,7 @@ public class TestMessageRouter {
     @Test
     public void addHandle(){
         Map<Integer, MessageHandle> msgHandles=new HashMap<>();
-        var handleClasses=ClassScanner.getAllSubClass("com.company.message",
+        var handleClasses= ClassScannerUtil.getAllSubClass("com.company.message",
                 MessageHandle.class);
         handleClasses.forEach(p->{
             Arrays.stream(p.getDeclaredMethods()).forEach(method ->{

@@ -1,7 +1,7 @@
 package com.company.im.chat.event;
 
 
-import com.company.im.chat.helper.EventType;
+import com.company.im.chat.common.EventType;
 
 /*
 **用户登录事件

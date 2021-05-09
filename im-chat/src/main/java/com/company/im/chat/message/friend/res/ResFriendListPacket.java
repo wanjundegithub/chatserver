@@ -1,22 +1,23 @@
-package com.company.im.chat.message.friend;
+package com.company.im.chat.message.friend.res;
 
 
-import com.company.im.chat.helper.PacketType;
+import com.company.im.chat.common.PacketType;
 import com.company.im.chat.message.AbstractPacket;
+import com.company.im.chat.message.friend.bean.FriendItemBean;
 import io.netty.buffer.ByteBuf;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ResFriendsPacket extends AbstractPacket {
+public class ResFriendListPacket extends AbstractPacket {
 
     private List<FriendItemBean> friends;
 
-    public ResFriendsPacket(List<FriendItemBean> friends) {
+    public ResFriendListPacket(List<FriendItemBean> friends) {
         this.friends = friends;
     }
 
-    public ResFriendsPacket() {
+    public ResFriendListPacket() {
     }
 
     @Override
@@ -42,7 +43,7 @@ public class ResFriendsPacket extends AbstractPacket {
 
     @Override
     public int getPacketID() {
-        return PacketType.ResFriendsInfo;
+        return PacketType.ResFriendList;
     }
 
     public List<FriendItemBean> getFriends() {

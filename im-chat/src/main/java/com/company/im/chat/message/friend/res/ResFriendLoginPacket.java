@@ -1,7 +1,7 @@
-package com.company.im.chat.message.friend;
+package com.company.im.chat.message.friend.res;
 
 
-import com.company.im.chat.helper.PacketType;
+import com.company.im.chat.common.PacketType;
 import com.company.im.chat.message.AbstractPacket;
 import io.netty.buffer.ByteBuf;
 

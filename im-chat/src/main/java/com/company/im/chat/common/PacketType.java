@@ -1,17 +1,17 @@
-package com.company.im.chat.helper;
+package com.company.im.chat.common;
 
 /*
-**消息类型
+ **消息类型
  */
 public  class PacketType {
 
     /*
-    **请求-用户注册
+     **请求-用户注册
      */
     public static int ReqUserRegister=1_000;
 
     /*
-    **回应-用户注册
+     **回应-用户注册
      */
     public static int ResUserRegister=1_001;
 
@@ -56,7 +56,7 @@ public  class PacketType {
     public static int ResUserChat=5_001;
 
     /*
-    **请求-搜索好友
+     **请求-搜索好友
      */
     public static int ReqSearchFriend=6_000;
 
@@ -68,36 +68,31 @@ public  class PacketType {
     /*
      **请求-好友登录
      */
-    public static int ReqFriendLogin=7_000;
+    public static int ResFriendLogin=7_000;
 
     /*
      **回应-好友登录
      */
-    public static int ResFriendLogin=7_001;
-
-    /*
-     **请求-好友登出
-     */
-    public static int ReqFriendLogout=7_000;
-
-    /*
-     **回应-好友登出
-     */
     public static int ResFriendLogout=7_001;
 
     /*
-    **请求-用户信息
+     **请求-用户信息
      */
     public static int ReqUserInfo=8_000;
 
     /*
-    **回应-用户信息
+     **回应-用户信息
      */
     public static int ResUserInfo=8_001;
 
     /*
-    **回应-好友
+     **回应-好友
      */
     public static int ResFriendsInfo=9_001;
+
+    /*
+     **回应-好友列表
+     */
+    public static int ResFriendList=9_002;
 
 }

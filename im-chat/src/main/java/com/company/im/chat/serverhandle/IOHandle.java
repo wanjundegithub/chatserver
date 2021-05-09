@@ -3,7 +3,7 @@ package com.company.im.chat.serverhandle;
 
 import com.company.im.chat.context.SpringContext;
 import com.company.im.chat.dispatcher.CmdTask;
-import com.company.im.chat.helper.SessionCloseReason;
+import com.company.im.chat.common.SessionCloseReason;
 import com.company.im.chat.message.AbstractPacket;
 import com.company.im.chat.session.IOSession;
 import com.company.im.chat.utils.ChannelUtil;
@@ -44,6 +44,8 @@ public class IOHandle extends ChannelInboundHandlerAdapter {
             logger.error("空数据，请检查客户端发送情况,IP为："+ChannelUtil.getRemoteIp(channel));
             return;
         }
+        logger.info("succeed receive pact, content is {}",
+                message.getClass().getSimpleName());
         var session=ChannelUtil.getSession(channel);
         var userTask=new CmdTask(session.getDispatchKey(),message,session);
         //线程池处理用户消息

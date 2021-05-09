@@ -1,4 +1,4 @@
-package com.company.im.chat.helper;
+package com.company.im.chat.common;
 
 public enum SessionCloseReason {
     /*

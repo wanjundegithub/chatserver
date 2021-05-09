@@ -2,7 +2,7 @@ package com.company.im.chat.message;
 
 import com.company.im.chat.session.IOSession;
 import com.company.im.chat.utils.ChannelUtil;
-import com.company.im.chat.utils.ClassScanner;
+import com.company.im.chat.utils.ClassScannerUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,7 +25,7 @@ public enum MessageRouter {
     **实例化msgPools,msgHandles
      */
     MessageRouter(){
-        var packetClasses= ClassScanner.getAllSubClass(
+        var packetClasses= ClassScannerUtil.getAllSubClass(
                 "com.company.im.chat.message", AbstractPacket.class);
         packetClasses.forEach(p->{
             AbstractPacket packet=null;
@@ -37,7 +37,7 @@ public enum MessageRouter {
                 e.printStackTrace();
             }
         });
-        var handleClasses=ClassScanner.getAllSubClass(
+        var handleClasses= ClassScannerUtil.getAllSubClass(
                 "com.company.im.chat.message", MessageHandle.class);
         handleClasses.forEach(p->{
             Arrays.stream(p.getDeclaredMethods()).forEach(method ->{

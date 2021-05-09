@@ -1,11 +1,10 @@
 package com.company.im.chat;
 
 import com.company.im.chat.data.model.Friend;
-import com.company.im.chat.helper.StateHelper;
+import com.company.im.chat.common.StateHelper;
 import com.company.im.chat.message.AbstractPacket;
-import com.company.im.chat.message.friend.FriendItemBean;
-import com.company.im.chat.message.friend.ResFriendsPacket;
-import com.company.im.chat.message.search.ResSearchFriendPacket;
+import com.company.im.chat.message.friend.bean.FriendItemBean;
+import com.company.im.chat.message.friend.res.ResFriendListPacket;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import org.junit.Test;
@@ -21,13 +20,7 @@ public class TestMessage {
 
     @Test
     public void testSearchFriendPacket(){
-        ResSearchFriendPacket packet=new ResSearchFriendPacket("James","1号");
-        ByteBuf buf=Unpooled.buffer(100);
-        packet.writeBody(buf);
-        //
-        ResSearchFriendPacket readPacket=new ResSearchFriendPacket();
-        readPacket.readBody(buf);
-        logger.info(readPacket.getFriendName()+readPacket.getRemark()+readPacket.getPacketID());
+
     }
 
     @Test
@@ -39,11 +32,11 @@ public class TestMessage {
         friendItemBeanList.add(new FriendItemBean
                 (new Friend("Bob","kk","4",1,"male")
                         ,StateHelper.OnLine));
-        AbstractPacket packet=new ResFriendsPacket(friendItemBeanList);
+        AbstractPacket packet=new ResFriendListPacket(friendItemBeanList);
         ByteBuf buf=Unpooled.buffer(200);
         packet.writeBody(buf);
         //
-        ResFriendsPacket readPacket=new ResFriendsPacket();
+        ResFriendListPacket readPacket=new ResFriendListPacket();
         readPacket.readBody(buf);
         for(var item:readPacket.getFriends()){
             logger.info(item.toString());

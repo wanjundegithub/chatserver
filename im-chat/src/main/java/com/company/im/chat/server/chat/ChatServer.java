@@ -1,6 +1,7 @@
-package com.company.im.chat.server;
+package com.company.im.chat.server.chat;
 
 import com.company.im.chat.context.SpringContext;
+import com.company.im.chat.server.ServerNode;
 import com.company.im.chat.serverhandle.IOHandle;
 import com.company.im.chat.serverhandle.PacketDecoderHandle;
 import com.company.im.chat.serverhandle.PacketEncoderHandle;
@@ -19,7 +20,7 @@ import org.slf4j.LoggerFactory;
 /*
 **chat server:初始化，启动，关闭
  */
-public class ChatServer implements ServerNode{
+public class ChatServer implements ServerNode {
 
     private static Logger logger= LoggerFactory.getLogger(ChatServer.class);
 
@@ -51,24 +52,25 @@ public class ChatServer implements ServerNode{
                         protected void initChannel(SocketChannel socketChannel) throws Exception {
                             // 给pipeline管道设置处理器
                             var pipeline=socketChannel.pipeline();
-                            pipeline.addLast(new PacketEncoderHandle());
                             pipeline.addLast(new PacketDecoderHandle(
                                     1024*4,0,4,
                                     0,4));
-                            pipeline.addLast(new IOHandle());
                             pipeline.addLast(new LengthFieldPrepender(4));
+                            pipeline.addLast(new PacketEncoderHandle());
                             //300s无响应便会触发UserEventTriggered事件到MessageTransportHandler
                             pipeline.addLast("idleStateHandle",new IdleStateHandler(
                                     0,0,300));
+                            pipeline.addLast(new IOHandle());
                         }
                     });//给workerGroup的EventLoop对应的管道设置处理器
-            logger.info("服务器端已准备就绪");
             //绑定端口号，启动服务端
             serverBootstrap.bind(port).sync();
         }
         catch (Exception e){
             logger.error(e.getMessage());
+            return;
         }
+        logger.info("chat server start success at [{}] ",port);
     }
 
     @Override

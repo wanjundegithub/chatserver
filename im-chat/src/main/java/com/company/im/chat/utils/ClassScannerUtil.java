@@ -11,7 +11,6 @@ import org.springframework.core.type.classreading.SimpleMetadataReaderFactory;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.ResourceUtils;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Modifier;
 import java.util.HashSet;
 import java.util.Set;
@@ -20,9 +19,9 @@ import java.util.function.Predicate;
 /*
 **类扫描（借助Spring）
  */
-public class ClassScanner {
+public class ClassScannerUtil {
 
-    private static Logger logger= LoggerFactory.getLogger(ClassScanner.class);
+    private static Logger logger= LoggerFactory.getLogger(ClassScannerUtil.class);
 
     /*
     **默认过滤器（无限定条件）

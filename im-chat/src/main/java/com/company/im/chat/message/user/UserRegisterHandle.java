@@ -3,6 +3,7 @@ package com.company.im.chat.message.user;
 
 import com.company.im.chat.context.SpringContext;
 import com.company.im.chat.message.MessageHandle;
+import com.company.im.chat.message.user.res.ResUserRegisterPacket;
 import com.company.im.chat.session.IOSession;
 import io.netty.channel.Channel;
 

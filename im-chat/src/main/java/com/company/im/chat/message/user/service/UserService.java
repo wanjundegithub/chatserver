@@ -1,12 +1,11 @@
-package com.company.im.chat.service;
+package com.company.im.chat.message.user.service;
 
 import com.company.im.chat.context.SpringContext;
 import com.company.im.chat.data.dao.UserDao;
 import com.company.im.chat.data.model.User;
-import com.company.im.chat.helper.SessionCloseReason;
-import com.company.im.chat.helper.StateHelper;
-import com.company.im.chat.message.AbstractPacket;
-import com.company.im.chat.message.user.ResUserRegisterPacket;
+import com.company.im.chat.common.SessionCloseReason;
+import com.company.im.chat.common.StateHelper;
+import com.company.im.chat.message.user.res.ResUserRegisterPacket;
 import com.company.im.chat.session.IOSession;
 import com.company.im.chat.session.SessionManager;
 import com.company.im.chat.utils.ChannelUtil;
@@ -59,6 +58,13 @@ public class UserService {
     /*
     判断用户是否在线
      */
+    public boolean isUserOnline(String name){
+        return getUserOnlineState(name)==StateHelper.OnLine;
+    }
+
+    /*
+    判断用户是否在线
+     */
     public byte getUserOnlineState(String name){
         if(onlineUsers.contains(name))
         {
@@ -67,7 +73,7 @@ public class UserService {
         return StateHelper.OffLine;
     }
 
-    private User getOnlineUser(String name){
+    public User getOnlineUser(String name){
         if(!loginUsers.containsKey(name)){
             logger.error("在线登录列表中不包含该用户名："+name);
             return null;

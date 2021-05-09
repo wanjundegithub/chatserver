@@ -1,6 +1,6 @@
 package com.company.im.chat.event;
 
-import com.company.im.chat.helper.EventType;
+import com.company.im.chat.common.EventType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;

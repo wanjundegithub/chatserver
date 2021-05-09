@@ -1,4 +1,4 @@
-package com.company.im.chat.message.friend;
+package com.company.im.chat.message.friend.bean;
 
 import com.company.im.chat.data.model.Friend;
 import com.company.im.chat.message.ByteBufBean;

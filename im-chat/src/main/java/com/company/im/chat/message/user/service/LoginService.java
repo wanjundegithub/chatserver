@@ -1,12 +1,12 @@
-package com.company.im.chat.service;
+package com.company.im.chat.message.user.service;
 
 import com.company.im.chat.context.SpringContext;
 import com.company.im.chat.data.model.User;
 import com.company.im.chat.event.UserLoginEvent;
-import com.company.im.chat.helper.EventType;
-import com.company.im.chat.helper.StateHelper;
+import com.company.im.chat.common.EventType;
+import com.company.im.chat.common.StateHelper;
 import com.company.im.chat.message.AbstractPacket;
-import com.company.im.chat.message.user.ResUserLoginPacket;
+import com.company.im.chat.message.user.res.ResUserLoginPacket;
 import com.company.im.chat.session.IOSession;
 import com.company.im.chat.session.SessionManager;
 import com.company.im.chat.utils.ChannelUtil;

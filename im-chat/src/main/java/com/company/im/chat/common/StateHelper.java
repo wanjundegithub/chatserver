@@ -1,4 +1,4 @@
-package com.company.im.chat.helper;
+package com.company.im.chat.common;
 
 public class StateHelper {
     public static final byte Action_Success=1;

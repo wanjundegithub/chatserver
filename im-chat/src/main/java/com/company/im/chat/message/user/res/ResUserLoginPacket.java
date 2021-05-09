@@ -1,29 +1,30 @@
-package com.company.im.chat.message.user;
+package com.company.im.chat.message.user.res;
 
-import com.company.im.chat.helper.PacketType;
+
+import com.company.im.chat.common.PacketType;
 import com.company.im.chat.message.AbstractPacket;
 import io.netty.buffer.ByteBuf;
 
 /*
-**回应用户注册消息
+**用户登录消息
  */
-public class ResUserRegisterPacket extends AbstractPacket {
+public class ResUserLoginPacket extends AbstractPacket {
 
     private byte resultCode;
 
     private String message;
 
-    public ResUserRegisterPacket(byte resultCode, String message) {
+    public ResUserLoginPacket(byte resultCode, String message) {
         this.resultCode = resultCode;
         this.message = message;
     }
 
-    public ResUserRegisterPacket() {
+    public ResUserLoginPacket() {
     }
 
     @Override
     public int getPacketID() {
-        return PacketType.ResUserRegister;
+        return PacketType.ResUserLogin;
     }
 
     @Override
@@ -34,7 +35,7 @@ public class ResUserRegisterPacket extends AbstractPacket {
 
     @Override
     public void readBody(ByteBuf byteBuf) {
-        resultCode=byteBuf.readByte();
+        resultCode =byteBuf.readByte();
         message=readByteToString(byteBuf);
     }
 
