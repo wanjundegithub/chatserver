@@ -54,15 +54,6 @@ public enum SessionManager {
         sendPacket(session,msg);
     }
 
-    /**
-     * 发送数据包
-     * @param channel
-     * @param msg
-     */
-    public void sendPacket(Channel channel, AbstractPacket msg){
-        IOSession session= ChannelUtil.getSession(channel);
-        sendPacket(session,msg);
-    }
 
     /**
      * 获取session

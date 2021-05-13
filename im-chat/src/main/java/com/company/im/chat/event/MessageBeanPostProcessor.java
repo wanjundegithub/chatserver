@@ -38,7 +38,6 @@ public class MessageBeanPostProcessor implements BeanPostProcessor,
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName)
             throws BeansException {
-        LoggerUtil.info(" begin register event listen");
         try {
             Class<?> clazz=bean.getClass();
             Object listener=bean;
@@ -59,7 +58,7 @@ public class MessageBeanPostProcessor implements BeanPostProcessor,
             }
         }
         catch (Exception e){
-            LoggerUtil.error(e.getMessage());
+            LoggerUtil.error(e.getMessage(),MessageBeanPostProcessor.class);
         }
         return bean;
     }

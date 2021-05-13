@@ -34,54 +34,42 @@ public class UserService {
     private UserDao userDao;
 
     /*
-    **最近登录过的所有用户
-     */
-    private ConcurrentHashMap<String, User> loginUsers=new ConcurrentHashMap<>(1000);
-
-    /*
     **在线用户
      */
-    private Set<String> onlineUsers=new HashSet<>();
+    private ConcurrentHashMap<String, User> onlineUsers=new ConcurrentHashMap<>(1000);
 
     /*
     **添加登录用户
      */
     public void addOnlineUser(String  name,User user){
-        loginUsers.put(name,user);
-        onlineUsers.add(name);
+        onlineUsers.put(name,user);
     }
 
     /*
-    **移除登录用户
+    **从在线用户列表中移除下线用户
      */
     public void removeFromOnlineUsers(String name){
-        onlineUsers.add(name);
+        onlineUsers.remove(name);
     }
 
     /*
     判断用户是否在线
      */
     public boolean isUserOnline(String name){
-        return getUserOnlineState(name)==StateHelper.OnLine;
+        return onlineUsers.containsKey(name);
     }
 
-    /*
-    判断用户是否在线
+    /**
+     * 获取在线用户
+     * @param name
+     * @return
      */
-    public byte getUserOnlineState(String name){
-        if(onlineUsers.contains(name))
-        {
-            return StateHelper.OnLine;
-        }
-        return StateHelper.OffLine;
-    }
-
     public User getOnlineUser(String name){
-        if(!loginUsers.containsKey(name)){
+        if(!onlineUsers.containsKey(name)){
             logger.error("在线登录列表中不包含该用户名："+name);
             return null;
         }
-        return  loginUsers.get(name);
+        return  onlineUsers.get(name);
     }
 
     /*

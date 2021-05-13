@@ -41,10 +41,6 @@ public class FriendService {
         String userName=user.getUserName();
         var friends=getFriends(userName);
         ResFriendListPacket packet=new ResFriendListPacket(friends);
-        LoggerUtil.info("friend size:"+String.valueOf(packet.getFriends().size()));
-        for(var item :packet.getFriends()){
-            LoggerUtil.info(item.getFriend().toString());
-        }
         SessionManager.Instance.sendPacket(userName,packet);
         //用户上线
         onUserLogin(userName,friends);
