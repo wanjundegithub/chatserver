@@ -1,28 +1,20 @@
 package com.company.im.chat.utils;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-public class LoggerUtil{
+public class LoggerUtil {
 
-    /**
-     * Log an exception at the ERROR level with an
-     * accompanying message.
-     *
-     * @param errMsg the message accompanying the exception
-     * @param e      the exception to log
-     */
-    public static void error(String errMsg, Exception e) {
-        Logger logger = LoggerSystem.EXCEPTION.getLogger();
-        logger.error("", e);
+    private static Logger getLogger(Class clazz) {
+        Logger logger=LoggerFactory.getLogger(clazz);
+        return logger;
     }
 
-    public static void error(String format, Object... arguments) {
-        Logger logger = LoggerSystem.EXCEPTION.getLogger();
-        logger.error(format, arguments);
+    public static void info(String message,Class clazz){
+        getLogger(clazz).info(message);
     }
 
-    public static void info(String format, Object... arguments){
-        Logger logger = LoggerSystem.EXCEPTION.getLogger();
-        logger.info(format,arguments);
+    public static void error(String error,Class clazz){
+        getLogger(clazz).error(error);
     }
 }
