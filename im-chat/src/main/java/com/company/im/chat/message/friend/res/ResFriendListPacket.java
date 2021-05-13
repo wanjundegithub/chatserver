@@ -4,6 +4,7 @@ package com.company.im.chat.message.friend.res;
 import com.company.im.chat.common.PacketType;
 import com.company.im.chat.message.AbstractPacket;
 import com.company.im.chat.message.friend.bean.FriendItemBean;
+import com.company.im.chat.utils.LoggerUtil;
 import io.netty.buffer.ByteBuf;
 
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ import java.util.List;
 
 public class ResFriendListPacket extends AbstractPacket {
 
-    private List<FriendItemBean> friends;
+    private List<FriendItemBean> friends=new ArrayList<>();
 
     public ResFriendListPacket(List<FriendItemBean> friends) {
         this.friends = friends;
@@ -31,9 +32,6 @@ public class ResFriendListPacket extends AbstractPacket {
     @Override
     public void readBody(ByteBuf byteBuf) {
         int size=byteBuf.readInt();
-        if(friends==null){
-            friends=new ArrayList<>();
-        }
         for(int i=0;i<size;i++){
             FriendItemBean friendItemBean=new FriendItemBean();
             friendItemBean.readBody(byteBuf);

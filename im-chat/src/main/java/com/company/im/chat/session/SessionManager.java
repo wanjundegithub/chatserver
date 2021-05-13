@@ -72,7 +72,7 @@ public enum SessionManager {
     public IOSession getSessionByUserName(String userName)
     {
         if(!userSession.containsKey(userName)){
-            logger.error(userName +"has not registered");
+            logger.error(userName +" has not registered");
             return null;
         }
         return userSession.get(userName);

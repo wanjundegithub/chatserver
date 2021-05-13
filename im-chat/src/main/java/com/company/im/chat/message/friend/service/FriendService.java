@@ -11,6 +11,7 @@ import com.company.im.chat.message.friend.res.ResFriendLoginPacket;
 import com.company.im.chat.message.friend.res.ResFriendLogoutPacket;
 import com.company.im.chat.message.user.service.UserService;
 import com.company.im.chat.session.SessionManager;
+import com.company.im.chat.utils.LoggerUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,7 +40,11 @@ public class FriendService {
     public void onGetFriends(User user){
         String userName=user.getUserName();
         var friends=getFriends(userName);
-        AbstractPacket packet=new ResFriendListPacket(friends);
+        ResFriendListPacket packet=new ResFriendListPacket(friends);
+        LoggerUtil.info("friend size:"+String.valueOf(packet.getFriends().size()));
+        for(var item :packet.getFriends()){
+            LoggerUtil.info(item.getFriend().toString());
+        }
         SessionManager.Instance.sendPacket(userName,packet);
         //用户上线
         onUserLogin(userName,friends);

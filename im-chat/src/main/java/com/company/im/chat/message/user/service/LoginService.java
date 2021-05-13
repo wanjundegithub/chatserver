@@ -38,8 +38,9 @@ public class LoginService {
             return;
         }
         if(user==null){
-            AbstractPacket packet=new ResUserLoginPacket
-                (StateHelper.Action_Failure,userName+" validation fail,check userName or password");
+            ResUserLoginPacket packet=new ResUserLoginPacket(StateHelper.Action_Failure,
+                    userName+" validation fail,check userName or password");
+            logger.info("login message is: "+packet.getMessage());
             session.sendPacket(packet);
             return;
         }
@@ -58,9 +59,10 @@ public class LoginService {
         if(!SessionManager.Instance.RegisterSession(user,session)) {
             return;
         }
-        AbstractPacket packet=new ResUserLoginPacket(StateHelper.Action_Success,
+        ResUserLoginPacket packet=new ResUserLoginPacket(StateHelper.Action_Success,
                 userName+" success login");
         session.sendPacket(packet);
+        logger.info("login success send message is "+packet.getMessage());
         //处理相关的登录事件
         SpringContext.getEventDispatcher().fireEvent(
                 new UserLoginEvent(EventType.LOGIN,userName));

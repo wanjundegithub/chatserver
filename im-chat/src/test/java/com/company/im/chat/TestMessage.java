@@ -1,8 +1,11 @@
 package com.company.im.chat;
 
+import com.company.im.chat.common.PacketType;
 import com.company.im.chat.data.model.Friend;
 import com.company.im.chat.common.StateHelper;
 import com.company.im.chat.message.AbstractPacket;
+import com.company.im.chat.message.MessageRouter;
+import com.company.im.chat.message.chat.ChatHandle;
 import com.company.im.chat.message.friend.bean.FriendItemBean;
 import com.company.im.chat.message.friend.res.ResFriendListPacket;
 import io.netty.buffer.ByteBuf;
@@ -43,21 +46,9 @@ public class TestMessage {
         }
     }
 
-    private Map<Integer, Set<Object>> maps=new HashMap<>();
-    @Test
-     public void testList(){
-        Set<Object> listeners=maps.get(1);
-        if(listeners==null){
-            listeners=new CopyOnWriteArraySet<>();
-            maps.put(1,listeners);
-        }
-        listeners.add("hello,world");
-
-        for(var key:maps.keySet()){
-            var set=maps.get(key);
-            for(var o:set){
-                logger.info(o.toString());
-            }
-        }
-     }
+   @Test
+   public void testGetHandle() {
+        var handle=(ChatHandle) MessageRouter.Instance.getHandle(PacketType.ReqUserChat);
+        logger.info(handle.test());
+   }
 }

@@ -21,14 +21,6 @@ public class ResUserInfoPacket extends AbstractPacket {
 
     private String signature;
 
-    public ResUserInfoPacket(User user){
-        this.userName=user.getUserName();
-        this.password=user.getPassword();
-        this.sex = user.getSex();
-        this.age = user.getAge();
-        this.signature = user.getSignature();
-    }
-
     public ResUserInfoPacket(String userName, String password, String sex,
                              int age, String signature) {
         this.userName = userName;
@@ -51,7 +43,7 @@ public class ResUserInfoPacket extends AbstractPacket {
        writeStringToByte(byteBuf,userName);
        writeStringToByte(byteBuf,password);
        writeStringToByte(byteBuf,sex);
-       byteBuf.writeByte(age);
+       byteBuf.writeInt(age);
        writeStringToByte(byteBuf,signature);
     }
 

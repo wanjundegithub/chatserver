@@ -112,4 +112,9 @@ public enum MessageRouter {
         }
         return  packet;
     }
+
+    public MessageHandle getHandle(int packetID){
+        return msgHandles.get(packetID);
+    }
+
 }

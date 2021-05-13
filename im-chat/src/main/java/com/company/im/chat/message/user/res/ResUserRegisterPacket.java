@@ -9,13 +9,13 @@ import io.netty.buffer.ByteBuf;
  */
 public class ResUserRegisterPacket extends AbstractPacket {
 
-    private byte resultCode;
+    private String userName;
 
-    private String message;
+    private byte result;
 
-    public ResUserRegisterPacket(byte resultCode, String message) {
-        this.resultCode = resultCode;
-        this.message = message;
+    public ResUserRegisterPacket(String userName, byte result) {
+        this.userName=userName;
+        this.result = result;
     }
 
     public ResUserRegisterPacket() {
@@ -28,29 +28,25 @@ public class ResUserRegisterPacket extends AbstractPacket {
 
     @Override
     public void writeBody(ByteBuf byteBuf) {
-        byteBuf.writeByte(resultCode);
-        writeStringToByte(byteBuf,message);
+        writeStringToByte(byteBuf,userName);
+        byteBuf.writeByte(result);
     }
 
     @Override
     public void readBody(ByteBuf byteBuf) {
-        resultCode=byteBuf.readByte();
-        message=readByteToString(byteBuf);
+        userName=readByteToString(byteBuf);
+        result=byteBuf.readByte();
     }
 
-    public byte getResultCode() {
-        return resultCode;
+    public byte getResult() {
+        return result;
     }
 
-    public void setResultCode(byte resultCode) {
-        this.resultCode = resultCode;
+    public String getUserName() {
+        return userName;
     }
 
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

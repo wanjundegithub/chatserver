@@ -6,6 +6,7 @@ import com.company.im.chat.data.model.User;
 import com.company.im.chat.common.SessionCloseReason;
 import com.company.im.chat.common.StateHelper;
 import com.company.im.chat.message.AbstractPacket;
+import com.company.im.chat.message.user.req.ReqUserRegisterPacket;
 import com.company.im.chat.message.user.res.ResUserInfoPacket;
 import com.company.im.chat.message.user.res.ResUserRegisterPacket;
 import com.company.im.chat.session.IOSession;
@@ -99,30 +100,36 @@ public class UserService {
         return user;
     }
 
-    /*
-    **注册新用户
+    /**
+     * 新用户注册
+     * @param channel
+     * @param packet
      */
-    public boolean registerUser(Channel channel,User user){
-        var name=user.getUserName();
+    public void registerUser(Channel channel,AbstractPacket packet){
+        ReqUserRegisterPacket reqUserRegisterPacket=(ReqUserRegisterPacket)packet;
+        String userName=reqUserRegisterPacket.getUserName();
         var session= ChannelUtil.getSession(channel);
         ResUserRegisterPacket userRegisterPacket=null;
-        if(userDao.getUserByUserName(name)!=null){
-            logger.error("已存在相同用户名:"+name);
-            userRegisterPacket=new ResUserRegisterPacket(StateHelper.Action_Failure,
-                    "已存在相同用户名:"+name);
+        if(userDao.getUserByUserName(userName)!=null){
+            logger.error("have already same name:"+userName);
+            userRegisterPacket=new ResUserRegisterPacket(userName,StateHelper.Action_Failure);
             session.sendPacket(userRegisterPacket);
-            return false;
+            return ;
         }
-        userRegisterPacket=new ResUserRegisterPacket(StateHelper.Action_Success, name+"用户注册成功");
-        userDao.addUser(user);
-        return false;
+        logger.info(userName+" register success ");
+        userRegisterPacket=new ResUserRegisterPacket(userName,StateHelper.Action_Success);
+        session.sendPacket(userRegisterPacket);
+        userDao.addUser(new User(reqUserRegisterPacket.getUserName(), reqUserRegisterPacket.getPassword(),
+                reqUserRegisterPacket.getSex(), reqUserRegisterPacket.getAge(),
+                reqUserRegisterPacket.getSignature()));
     }
 
     /*
     **获取用户信息
      */
     public void onGetUserInfo(User user){
-        AbstractPacket packet=new ResUserInfoPacket(user);
+        AbstractPacket packet=new ResUserInfoPacket(user.getUserName(),user.getPassword(),
+                user.getSex(),user.getAge(),user.getSignature());
         SessionManager.Instance.sendPacket(user.getUserName(),packet);
     }
 

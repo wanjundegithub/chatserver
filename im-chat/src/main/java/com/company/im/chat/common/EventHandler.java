@@ -6,7 +6,7 @@ import java.lang.annotation.*;
 /**
  * 事件处理者
  *
- * @author kinson
+ *
  */
 @Documented
 @Target(ElementType.METHOD)

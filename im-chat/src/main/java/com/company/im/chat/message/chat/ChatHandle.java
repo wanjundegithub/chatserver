@@ -17,4 +17,11 @@ public class ChatHandle extends MessageHandle<ReqChatPacket> {
         SpringContext.getChatService().chat(session,
                 packet.getToUserName(), packet.getContent());
     }
+
+    public String test(){
+        if(SpringContext.getChatService()==null){
+            return "service is null";
+        }
+        return "hello";
+    }
 }
