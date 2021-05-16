@@ -18,10 +18,12 @@ public class ChatService {
      */
     public void chat(IOSession fromSession,String toUserName,String content){
         IOSession toSession=SessionManager.Instance.getSessionByUserName(toUserName);
+        logger.info("发送者:"+fromSession.getUser().getUserName()+",发送内容:"+content);
         if(toSession==null){
-            logger.error(toUserName+" session is null");
+            logger.error(" 接收者 "+toUserName+" 会话为空");
             return;
         }
+        logger.info("接收者:"+toUserName+",发送内容:"+content);
         AbstractPacket packet=new ResChatPacket(toUserName,content);
         fromSession.sendPacket(packet);
         toSession.sendPacket(packet);
